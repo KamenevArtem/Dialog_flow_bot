@@ -1,9 +1,8 @@
 import logging
 import os
 
-import telegram
-
 from dotenv import load_dotenv
+from telegram import ForceReply
 from telegram import Update
 from telegram.ext import Filters
 from telegram.ext import CommandHandler
@@ -12,12 +11,16 @@ from telegram.ext import MessageHandler
 from telegram.ext import Updater
 
 
-def start(update: Update, context=CallbackContext):
-    context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text='Hi'
-        )
+logger = logging.getLogger('Logger')
 
+
+def start(update: Update, context=CallbackContext):
+    user = update.effective_user
+    update.message.reply_markdown_v2(
+        fr'Hi {user.mention_markdown_v2()}\!',
+        reply_markup=ForceReply(selective=True)
+    )
+    
 
 def echo(update: Update, context=CallbackContext):
     context.bot.send_message(
@@ -54,6 +57,7 @@ def main():
         echo_handler
     )
     updater.start_polling()
+    updater.idle()
 
 
 if __name__ == '__main__':
