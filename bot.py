@@ -2,6 +2,7 @@ import logging
 import os
 
 from dotenv import load_dotenv
+from google.cloud import dialogflow_v2beta1 as dialogflow
 from telegram import ForceReply
 from telegram import Update
 from telegram.ext import Filters
@@ -16,6 +17,10 @@ logger = logging.getLogger('Logger')
 
 def start(update: Update, context=CallbackContext):
     user = update.effective_user
+    logger.info(
+        "User %s started the conversation.",
+        user.mention_markdown_v2()
+        )
     update.message.reply_markdown_v2(
         fr'Hi {user.mention_markdown_v2()}\!',
         reply_markup=ForceReply(selective=True)
