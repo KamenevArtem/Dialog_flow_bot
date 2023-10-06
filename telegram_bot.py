@@ -1,6 +1,8 @@
 import logging
 import os
 
+from dialogflow_API import detect_intent_texts
+
 from dotenv import load_dotenv
 from google.cloud import dialogflow_v2beta1 as dialogflow
 from telegram import ForceReply
@@ -13,31 +15,43 @@ from telegram.ext import Updater
 
 
 logger = logging.getLogger('Logger')
+load_dotenv()
+bot_token = os.environ['BOT_TOKEN']
+project_id = os.environ['PROJECT_ID']
 
 
-def start(update: Update, context=CallbackContext):
+def start(
+        update: Update,
+        context=CallbackContext):
     user = update.effective_user
     logger.info(
         "User %s started the conversation.",
         user.mention_markdown_v2()
         )
     update.message.reply_markdown_v2(
-        fr'Hi {user.mention_markdown_v2()}\!',
+        fr'Бот запущен\!',
         reply_markup=ForceReply(selective=True)
     )
 
 
-def echo(update: Update, context=CallbackContext):
+def echo(
+        update: Update,
+        context=CallbackContext):
+    chat_id = update.effective_chat.id
+    text = update.message.text
+    intent = detect_intent_texts(
+        project_id=project_id,
+        session_id=chat_id,
+        text=text,
+        language_code='ru'
+    )
     context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=update.message.text
+        chat_id=chat_id,
+        text=intent.query_result.fulfillment_text
     )
 
 
 def main():
-    load_dotenv()
-    bot_token = os.environ['BOT_TOKEN']
-    chat_id = os.environ['CHAT_ID']
     logging.basicConfig(
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         level=logging.INFO
@@ -47,17 +61,15 @@ def main():
         use_context=True
         )
     dispatcher = updater.dispatcher
-    start_handler = CommandHandler(
-        'start',
-        start
+    dispatcher.add_handler(
+        CommandHandler(
+            'start',
+            start)
         )
     echo_handler = MessageHandler(
         Filters.text & (~Filters.command),
         echo
     )
-    dispatcher.add_handler(
-        start_handler
-        )
     dispatcher.add_handler(
         echo_handler
     )
