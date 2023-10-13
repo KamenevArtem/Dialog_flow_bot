@@ -31,10 +31,14 @@ pip install -r requirements.txt
 python telegram_bot.py
 ```
 
+![alt text](https://dvmn.org/filer/canonical/1569214094/323/)
+
 Для запуска вконтакте бота используйте следующую команду:
 ```
 python vk_bot.py 
 ```
+
+![alt text](https://dvmn.org/filer/canonical/1569214089/322/)
 
 ### Расширения перечня ответов пользователям
 
