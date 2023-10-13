@@ -4,7 +4,6 @@ import os
 from dialogflow_API import detect_intent_texts
 
 from dotenv import load_dotenv
-from google.cloud import dialogflow_v2beta1 as dialogflow
 from telegram import ForceReply
 from telegram import Update
 from telegram.ext import Filters
@@ -53,9 +52,8 @@ def echo(
 
 def main():
     logging.basicConfig(
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        level=logging.INFO
-    )
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
     updater = Updater(
         token=bot_token,
         use_context=True
@@ -64,15 +62,16 @@ def main():
     dispatcher.add_handler(
         CommandHandler(
             'start',
-            start)
+            start
+            )
         )
     echo_handler = MessageHandler(
         Filters.text & (~Filters.command),
         echo
-    )
+        )
     dispatcher.add_handler(
         echo_handler
-    )
+        )
     updater.start_polling()
     updater.idle()
 
