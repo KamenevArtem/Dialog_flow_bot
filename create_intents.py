@@ -46,8 +46,8 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 def main():
     load_dotenv()
     project_id = os.environ["PROJECT_ID"]
-    with open("situations.json", "r") as my_file:
-        situations_json = my_file.read()
+    with open("situations.json", "r") as situations:
+        situations_json = situations.read()
         situations = json.loads(situations_json)
     for situation in situations:
         situation_content = situations[situation]
