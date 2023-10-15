@@ -16,7 +16,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 logger = logging.getLogger('Logger')
 
 
-def echo(event, vk_api, project_id):
+def reply(event, vk_api, project_id):
     intent = detect_intent_texts(
         project_id=project_id,
         session_id=event.user_id,
@@ -54,7 +54,7 @@ def main():
     for event in longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             try:
-                echo(event, vk_api, project_id)
+                reply(event, vk_api, project_id)
             except Exception as message:
                 logger.debug(message)
 

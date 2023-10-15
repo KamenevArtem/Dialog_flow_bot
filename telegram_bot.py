@@ -31,7 +31,7 @@ def start(
     )
 
 
-def echo(
+def reply(
         update: Update,
         context=CallbackContext):
     chat_id = update.effective_chat.id
@@ -67,7 +67,7 @@ def main():
         )
     echo_handler = MessageHandler(
         Filters.text & (~Filters.command),
-        echo
+        reply
         )
     dispatcher.add_handler(
         echo_handler
