@@ -33,6 +33,7 @@ def start(
 def reply(
         update: Update,
         context=CallbackContext):
+    project_id = os.environ['PROJECT_ID']
     chat_id = update.effective_chat.id
     text = update.message.text
     intent = detect_intent_texts(
@@ -50,7 +51,6 @@ def reply(
 def main():
     load_dotenv()
     bot_token = os.environ['BOT_TOKEN']
-    project_id = os.environ['PROJECT_ID']
     logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO)
