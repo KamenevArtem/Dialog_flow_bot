@@ -14,8 +14,6 @@ from telegram.ext import Updater
 
 
 logger = logging.getLogger('Logger')
-load_dotenv()
-bot_token = os.environ['BOT_TOKEN']
 project_id = os.environ['PROJECT_ID']
 
 
@@ -51,6 +49,8 @@ def echo(
 
 
 def main():
+    load_dotenv()
+    bot_token = os.environ['BOT_TOKEN']
     logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO)
