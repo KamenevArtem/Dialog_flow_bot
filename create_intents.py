@@ -49,10 +49,8 @@ def main():
     with open("situations.json", "r") as situations:
         situations_json = situations.read()
         situations = json.loads(situations_json)
-    for situation in situations:
-        situation_content = situations[situation]
-        questions = situation_content['questions']
-        answer = situation_content['answer']
+    for situation, desription in situations.items():
+        questions, answer = desription.values()
         create_intent(project_id, situation, questions, answer)
     list_intents(project_id)
 
