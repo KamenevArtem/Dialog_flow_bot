@@ -21,7 +21,8 @@ pip install -r requirements.txt
 * `PROJECT_ID` - ID проекта в Google-аккаунте. Можно найти в настройках Dialog Flow агента в графе "Google Project";
 * `TG_BOT_TOKEN` - токен бота. Он может быть получен сразу после создания бота. [Инструкция по созданию бота](https://habr.com/ru/articles/262247/);
 * `VK_API_KEY` - токен группы Вконтакте;
-* `GOOGLE_APPLICATION_CREDENTIALS` - путь к файлу key.json с GOOGLE_APPLICATION_CREDENTIALS>.
+* `GOOGLE_APPLICATION_CREDENTIALS` - путь к файлу key.json с GOOGLE_APPLICATION_CREDENTIALS>;
+* SITUATIONS_FILE_NAME - название файла где хранятся данные о новых ситуациях для Dialog Flow.
 
 
 ## Запуск 
