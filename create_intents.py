@@ -49,11 +49,11 @@ def main():
     with open("situations.json", "r") as my_file:
         situations_json = my_file.read()
         situations = json.loads(situations_json)
-        for situation in situations:
-            situation_content = situations[situation]
-            questions = situation_content['questions']
-            answer = situation_content['answer']
-            create_intent(project_id, situation, questions, answer)
+    for situation in situations:
+        situation_content = situations[situation]
+        questions = situation_content['questions']
+        answer = situation_content['answer']
+        create_intent(project_id, situation, questions, answer)
     list_intents(project_id)
 
 
