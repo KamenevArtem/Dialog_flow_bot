@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from google.cloud import dialogflow
 
 
-def list_intents(project_id):
+def show_intents(project_id):
     intents_client = dialogflow.IntentsClient()
     parent = dialogflow.AgentsClient.agent_path(project_id)
     intents = intents_client.list_intents(request={"parent": parent})
