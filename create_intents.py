@@ -52,7 +52,7 @@ def main():
     for situation, desription in situations.items():
         questions, answer = desription.values()
         create_intent(project_id, situation, questions, answer)
-    list_intents(project_id)
+    show_intents(project_id)
 
 
 if __name__ == "__main__":
